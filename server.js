@@ -8,25 +8,27 @@ const createRouter = require('./helpers/create_router.js');
 app.use(cors());
 app.use(bodyParser.json());
 
-MongoClient.connect('mongodb://localhost:27017')
+var url = process.env.MONGODB_URI
+
+MongoClient.connect(url)
 .then((client) => {
-  const db = client.db('emissions');
+  const db = client.db('heroku_2sb8cf67');
   const emissionFactorsCollection = db.collection('emissionFactors');
   const emissionsRouter = createRouter(emissionFactorsCollection);
-  app.use('/api/emissions/emissionFactors', emissionsRouter);
+  app.use('/api/heroku_2sb8cf67/emissionFactors', emissionsRouter);
 })
 .catch(console.err)
 
 MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
-  const db = client.db('emissions');
+  const db = client.db('heroku_2sb8cf67');
   const userDataCollection = db.collection('userData')
   const emissionsRouter = createRouter(userDataCollection);
-  app.use('/api/emissions/users', emissionsRouter);
+  app.use('/api/heroku_2sb8cf67/users', emissionsRouter);
 })
 .catch(console.err)
 
 
-app.listen(3000, function(){
+app.listen(process.env.PORT || 5000, function(){
   console.log("App running on port 3000");
 })

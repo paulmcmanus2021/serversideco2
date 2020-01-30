@@ -1,5 +1,3 @@
-use emissions;
-
 db.dropDatabase()
 
 db.emissionFactors.insertMany([
