@@ -19,7 +19,7 @@ MongoClient.connect(url)
 })
 .catch(console.err)
 
-MongoClient.connect('mongodb://localhost:27017')
+MongoClient.connect(url)
 .then((client) => {
   const db = client.db('heroku_2sb8cf67');
   const userDataCollection = db.collection('userData')
